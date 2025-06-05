@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  min-width: 1024px;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow-x: auto;
+  position: relative;
+  background-color: #000000;
+}
+
+@media (max-width: 1024px) {
+  body {
+    min-width: 1024px;
+    overflow-x: auto;
+  }
+}
