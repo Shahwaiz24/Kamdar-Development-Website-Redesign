@@ -3,6 +3,7 @@ import NavbarComponent from '../components/NavbarComponent'
 import HeroComponent from '../components/HeroComponent'
 import { AnimationContext } from '../utils/AnimationContext'
 import WhatWeDoComponent from '../components/WhatWeDoComponent'
+import OurProjectsComponent from '../components/OurProjectsComponent'
 const Home = () => {
   const [doorAnimationComplete, setDoorAnimationComplete] = useState(false)
   const [mountKey, setMountKey] = useState(Date.now())
@@ -23,6 +24,7 @@ const Home = () => {
           <NavbarComponent />
         </div>
         <WhatWeDoComponent />
+      <OurProjectsComponent />
       </div>
     </AnimationContext.Provider>
   )

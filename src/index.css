@@ -20,3 +20,14 @@ html, body {
     overflow-x: auto;
   }
 }
+
+/* Add this to your existing CSS file */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

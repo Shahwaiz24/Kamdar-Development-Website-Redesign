@@ -238,7 +238,7 @@ const WhatWeDoComponent = () => {
           </motion.p>
         </div>
       </motion.div>
-      <hr ref={hrRef} className='my-[150px] border-t-[1.5px] border-white opacity-50' />
+      <hr ref={hrRef} className='mt-[150px] mb-[50px] border-t-[1.5px] border-white opacity-50' />
     </div>
   )
 }
