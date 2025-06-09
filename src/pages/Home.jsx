@@ -5,6 +5,7 @@ import { AnimationContext } from '../utils/AnimationContext'
 import WhatWeDoComponent from '../components/WhatWeDoComponent'
 import OurProjectsComponent from '../components/OurProjectsComponent'
 import WhyChooseUsComponent from '../components/WhyChooseUsComponent'
+import CeoMessageComponent from '../components/CeoMessageComponent'
 const Home = () => {
   const [doorAnimationComplete, setDoorAnimationComplete] = useState(false)
   const [mountKey, setMountKey] = useState(Date.now())
@@ -27,6 +28,7 @@ const Home = () => {
         <WhatWeDoComponent />
       <OurProjectsComponent />
       <WhyChooseUsComponent />
+      <CeoMessageComponent />
       </div>
     </AnimationContext.Provider>
   )
