@@ -21,7 +21,7 @@ const OurProjectsComponent = () => {
   ]
 
   return (
-    <div className='w-full py-5 px-[200px]'>
+    <div className='w-full pt-5 pb-[120px] px-[200px]'>
         <div className='flex flex-row justify-between items-center'>
             <h1 className="text-[130px] font-[400] font-['Luxurious_Roman'] text-white">Our Projects</h1>
             <ButtonComponent 
