@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppColor from '../utils/AppColor'
 import ButtonComponent from './ButtonComponent'
 import ProjectShowCaseCardComponent from './ProjectShowCaseCardComponent'
+import { motion } from 'framer-motion'
 
 const OurProjectsComponent = () => {
   const sampleProjects = [
@@ -19,11 +20,76 @@ const OurProjectsComponent = () => {
     },
     
   ]
+  
+  // Animation state for sequential card flipping
+  const [flipStartTimes, setFlipStartTimes] = useState({});
+  
+  // Initialize the flip start times with staggered delays
+  useEffect(() => {
+    // Wait for initial animations to complete (approx. 2 seconds)
+    const baseDelay = 2000;
+    
+    // Calculate delay for each card (150ms between each)
+    const newFlipStartTimes = {};
+    sampleProjects.forEach((project, index) => {
+      newFlipStartTimes[project.id] = baseDelay + (index * 150);
+    });
+    
+    setFlipStartTimes(newFlipStartTimes);
+  }, []);
+  const titleText = "Our Projects";
+  const letterVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: i => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.05,
+      }
+    })
+  };
+
+  // Enhanced card variants with more dramatic animations
+  const cardVariants = {
+    offscreen: { 
+      opacity: 0, 
+      y: 80, 
+      scale: 0.85,
+      rotateX: 15,
+      filter: "blur(5px)"
+    },
+    onscreen: (index) => ({ 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      filter: "blur(0px)",
+      transition: { 
+        type: "spring",
+        bounce: 0.5,
+        duration: 1.2, 
+        delay: 0.3 * index,
+      }
+    })
+  };
 
   return (
     <div className='w-full pt-5 pb-[120px] px-[200px]'>
         <div className='flex flex-row justify-between items-center'>
-            <h1 className="text-[130px] font-[400] font-['Luxurious_Roman'] text-white">Our Projects</h1>
+            <h1 className="text-[130px] font-[400] font-['Luxurious_Roman'] text-white flex overflow-hidden">
+              {titleText.split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  custom={index}
+                  variants={letterVariants}
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true }}
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </motion.span>
+              ))}
+            </h1>
             <ButtonComponent 
                 label="View All Project"
                 color={AppColor.black}
@@ -50,7 +116,8 @@ const OurProjectsComponent = () => {
                    scrollSnapType: 'x mandatory',
                    WebkitOverflowScrolling: 'touch',
                    msOverflowStyle: 'none',
-                   scrollbarWidth: 'none'
+                   scrollbarWidth: 'none',
+                   perspective: '1200px', // Enhanced perspective for 3D effects
                  }}>
                 
                 {/* Using pairs of projects */}
@@ -60,14 +127,23 @@ const OurProjectsComponent = () => {
                         <div key={`pair-${index}`} 
                              className="flex flex-row gap-10 min-w-full snap-start px-3"
                              style={{ scrollSnapAlign: 'center' }}>
-                            {sampleProjects.slice(startIndex, startIndex + 2).map((project) => (
-                                <div key={project.id} className="w-[calc(50%-20px)] flex-shrink-0">
+                            {sampleProjects.slice(startIndex, startIndex + 2).map((project, projectIndex) => (
+                                <motion.div 
+                                  key={project.id} 
+                                  className="w-[calc(50%-20px)] flex-shrink-0"
+                                  variants={cardVariants}
+                                  custom={projectIndex + (index * 2)}
+                                  initial="offscreen"
+                                  whileInView="onscreen"
+                                  viewport={{ once: true, amount: 0.2 }}
+                                >
                                     <ProjectShowCaseCardComponent
                                         image={project.image}
                                         title={project.title}
                                         subtitle={project.subtitle}
+                                        flipStartTime={flipStartTimes[project.id] || 2000}
                                     />
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     );
