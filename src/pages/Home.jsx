@@ -7,6 +7,7 @@ import OurProjectsComponent from '../components/OurProjectsComponent'
 import WhyChooseUsComponent from '../components/WhyChooseUsComponent'
 import CeoMessageComponent from '../components/CeoMessageComponent'
 import RegisterNowComponent from '../components/RegisterNowComponent'
+
 const Home = () => {
   const [doorAnimationComplete, setDoorAnimationComplete] = useState(false)
   const [mountKey, setMountKey] = useState(Date.now())
@@ -18,19 +19,31 @@ const Home = () => {
 
   return (
     <AnimationContext.Provider value={{ doorAnimationComplete }}>
-      <div className='relative w-full h-screen'>
-        <HeroComponent 
-          key={mountKey}
-          setDoorAnimationComplete={setDoorAnimationComplete} 
-        />
-        <div className='absolute top-0 left-0 w-full'>
-          <NavbarComponent />
+      <div className='relative w-full'>
+        <div id="hero-section" className="hero-section">
+          <HeroComponent 
+            key={mountKey}
+            setDoorAnimationComplete={setDoorAnimationComplete} 
+          />
+          <div className='absolute top-0 left-0 w-full'>
+            <NavbarComponent />
+          </div>
         </div>
-        <WhatWeDoComponent />
-      <OurProjectsComponent />
-      <WhyChooseUsComponent />
-      <CeoMessageComponent />
-      <RegisterNowComponent />
+        <div id="what-we-do">
+          <WhatWeDoComponent />
+        </div>
+        <div id="our-projects">
+          <OurProjectsComponent />
+        </div>
+        <div id="why-choose-us">
+          <WhyChooseUsComponent />
+        </div>
+        <div id="ceo-message">
+          <CeoMessageComponent />
+        </div>
+        <div id="register-now">
+          <RegisterNowComponent />
+        </div>
       </div>
     </AnimationContext.Provider>
   )

@@ -97,23 +97,6 @@ const CeoMessageComponent = () => {
     return () => clearInterval(typingInterval);
   };
   
-  // Background animation variants
-  const backgroundVariants = {
-    animate: { 
-      scale: [1, 1.05, 1.1, 1.05, 1],
-      rotate: [0, 1, 0, -1, 0],
-      rotateX: [-5, 0, 5, 0, -5], // Enhanced rotateX range for more noticeable top-to-bottom rotation
-      filter: ["blur(0px) brightness(0.3)", "blur(1px) brightness(0.35)", "blur(2px) brightness(0.4)", "blur(1px) brightness(0.35)", "blur(0px) brightness(0.3)"],
-      transition: {
-        duration: 10, // Slightly faster for better rotation effect
-        repeat: Infinity,
-        repeatType: "loop", // Changed to loop for seamless repetition
-        ease: "easeInOut",
-        times: [0, 0.25, 0.5, 0.75, 1] // Explicitly define timing for smooth rotation
-      }
-    }
-  };
-  
   // Heading animation variants
   const headingVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -174,23 +157,6 @@ const CeoMessageComponent = () => {
 
   return (
     <div className="w-full py-20 ceo-message-bg">
-      {/* Background animation overlay */}
-      <motion.div 
-        className="absolute inset-0 z-0"
-        animate={backgroundVariants.animate}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'url("./ceo-message-bg.png")',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          transformOrigin: 'center center', // Changed to center center for better rotation effect
-          perspective: '1500px', // Increased perspective for more dramatic 3D effect
-          transformStyle: 'preserve-3d' // Added to enhance 3D effect
-        }}
-      />
-      
       {/* Content box with partial border at top */}
       <motion.div 
         ref={containerRef}

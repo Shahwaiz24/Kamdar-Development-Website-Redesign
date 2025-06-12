@@ -1,8 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppColor from '../utils/AppColor'
 
 const PlayButton = ({ size = 'w-34 h-34', iconSize = 75 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [screenSize, setScreenSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+  });
+
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calculate responsive sizes
+  const getResponsiveSizes = () => {
+    if (screenSize.width <= 640) { // Mobile
+      return {
+        buttonSize: 'w-20 h-20',
+        iconSize: 40
+      };
+    } else if (screenSize.width <= 1024) { // Tablet
+      return {
+        buttonSize: 'w-28 h-28',
+        iconSize: 55
+      };
+    } else { // Desktop
+      return {
+        buttonSize: 'w-34 h-34',
+        iconSize: 75
+      };
+    }
+  };
+
+  const responsiveSizes = getResponsiveSizes();
 
   return (
     <div 
@@ -24,15 +61,15 @@ const PlayButton = ({ size = 'w-34 h-34', iconSize = 75 }) => {
       
       {/* Play button */}
       <button 
-        className={`${size} bg-white opacity-80 backdrop-blur-sm rounded-full 
+        className={`${responsiveSizes.buttonSize} bg-white opacity-80 backdrop-blur-sm rounded-full 
                 flex items-center justify-center cursor-pointer shadow-lg
                 transition-all duration-500 ease-out
                 ${isHovered ? 'transform scale-110 opacity-95' : 'transform scale-100'}`}
         aria-label="Play video"
       >
         <svg 
-          width={iconSize} 
-          height={iconSize} 
+          width={responsiveSizes.iconSize} 
+          height={responsiveSizes.iconSize} 
           viewBox="0 0 24 24" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
