@@ -46,7 +46,7 @@ html, body {
 
 /* CEO Message component background */
 .ceo-message-bg {
-  background-image: url('./ceo-message-bg.png');
+  background-image: url('/ceo-message-bg.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -74,7 +74,7 @@ html, body {
   border-radius: 10px;
   
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.95);
-  background-image: url('./ceo_message_vector.png');
+  background-image: url('/ceo_message_vector.png');
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: contain;
